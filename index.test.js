@@ -1,35 +1,5 @@
 const recul = require('./index');
 
-// const stt = new State();
-//
-// stt.setValue('a', 1);
-// stt.setValue('b', '1');
-// stt.setValue('c', true);
-// stt.setValue('d', [1]);
-// stt.setValue('e', {a: 123});
-//
-// let a = stt.getValue('a');
-// let b = stt.getValue('b');
-// let c = stt.getValue('c');
-// let d = stt.getValue('d');
-// let e = stt.getValue('e');
-//
-// console.log('stt', stt.store);
-// console.log('---------------------');
-// console.log(a, b, c, d, e);
-//
-// console.log('===============');
-//
-// a = 2;
-// b = '2';
-// c = false;
-// d.push(2);
-// e.a = 456;
-//
-// console.log('stt', stt.store);
-// console.log('---------------------');
-// console.log(a, b, c, d, e);
-
 test('init', () => {
   expect(recul).toBeTruthy();
 });
