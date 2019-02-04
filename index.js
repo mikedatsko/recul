@@ -72,9 +72,9 @@ class Recul {
     self.store[name].setValue(value);
   }
 
-  getValue(name) {
+  getValue(name, defaultValue) {
     if (!this.store[name]) {
-      return undefined;
+      return defaultValue;
     }
 
     return this.store[name].getValue();
@@ -104,6 +104,25 @@ class Recul {
       this.listeners[listener.name] = this.listeners[listener.name].filter(listener_ => listener_.id !== listener.id);
     });
   }
+
+  subscribe(name, callback) {
+    return this.on(name, callback);
+  }
+
+  unsubscribe(listeners) {
+    return this.off(listeners);
+  }
 }
 
-module.exports = new Recul();
+const recul = new Recul();
+
+module.exports = {
+  recul: recul,
+  ReculOn: function(target, key) {
+    console.log('ReculOn', arguments);
+
+    return function() {
+      console.log('ReculOn', 'function', arguments);
+    };
+  }
+};
