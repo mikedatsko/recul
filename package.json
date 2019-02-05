@@ -1,13 +1,17 @@
 {
   "name": "recul",
   "version": "1.0.1",
-  "description": "State management",
+  "description": "Recul - state management for JS",
   "main": "index.js",
   "scripts": {
     "test": "jest"
   },
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikedatsko/recul.git"
+  },
+  "author": "Mykhailo Datsko",
+  "license": "MIT",
   "devDependencies": {
     "jest": "^24.0.0"
   }

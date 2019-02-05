@@ -26,6 +26,12 @@ recul.on('a', value => {
   console.log('a', value);
 });
 
+
+// Alias for "on"
+recul.subscribe('a', value => {
+  console.log('a', value);
+});
+
 // Subscribe with listener
 const listener = recul.on('a', value => {
   console.log('a', value);
@@ -35,6 +41,9 @@ recul.setValue('a', 1);
 // Unsubscribe
 recul.off(listener);
 recul.setValue('a', 2);
+
+// Alias for "off"
+recul.unsubscribe(listener);
 
 // Subscribe to many listeners
 const listener1 = recul.on('a', value => console.log('a', value));
