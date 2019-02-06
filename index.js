@@ -21,6 +21,10 @@ const immutableValue = {
   array: value => JSON.parse(JSON.stringify(value))
 };
 
+const config = {
+  localStorage: false
+};
+
 const getRandomId = () => {
   function generateRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
@@ -56,6 +60,10 @@ class Recul {
             return immutableValue[this.type](this.value);
           }
 
+          if (typeof this.value === 'undefined' && config.localStorage && localStorage) {
+            return localStorage.getItem(name);
+          }
+
           return this.value;
         },
         setValue: function(value) {
@@ -64,6 +72,10 @@ class Recul {
 
           if (isDispatch !== false && self.listeners[name]) {
             self.listeners[name].forEach(listener => listener.callback(value));
+          }
+
+          if (config.localStorage && localStorage) {
+            localStorage.setItem(name, value);
           }
         }
       };
@@ -118,6 +130,7 @@ const recul = new Recul();
 
 module.exports = {
   recul: recul,
+  config: config,
   ReculOn: function(target, key) {
     console.log('ReculOn', arguments);
 
