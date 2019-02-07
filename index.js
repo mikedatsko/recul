@@ -81,12 +81,16 @@ class Recul {
   }
 
   getValue(name, defaultValue) {
-    if (!this.store[name]) {
+    if (typeof this.store[name] === 'undefined') {
       if (config.localStorage && localStorage) {
         return localStorage.getItem(name);
       }
 
-      return defaultValue;
+      if (typeof defaultValue !== 'undefined') {
+        return defaultValue;
+      }
+
+      return undefined;
     }
 
     return this.store[name].getValue();

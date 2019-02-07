@@ -1,4 +1,4 @@
-const recul = require('./index');
+const recul = require('./index').recul;
 
 test('init', () => {
   expect(recul).toBeTruthy();
