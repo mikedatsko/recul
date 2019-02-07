@@ -60,10 +60,6 @@ class Recul {
             return immutableValue[this.type](this.value);
           }
 
-          if (typeof this.value === 'undefined' && config.localStorage && localStorage) {
-            return localStorage.getItem(name);
-          }
-
           return this.value;
         },
         setValue: function(value) {
@@ -86,6 +82,10 @@ class Recul {
 
   getValue(name, defaultValue) {
     if (!this.store[name]) {
+      if (config.localStorage && localStorage) {
+        return localStorage.getItem(name);
+      }
+
       return defaultValue;
     }
 
