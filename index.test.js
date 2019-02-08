@@ -64,3 +64,27 @@ test('is works "off"', async () => {
 
   expect(a).toEqual(3);
 });
+
+test('is works listener "subscribe" and "unsubscribe"', async () => {
+  expect.assertions(1);
+  recul.reset();
+
+  const a = await new Promise(resolve => {
+    let i = 0;
+
+    const listener = recul.subscribe('a', value => {
+      if (i === 1) {
+        resolve(value);
+      }
+
+      i++;
+    });
+
+    recul.setValue('a', 1);
+    listener.unsubscribe();
+    recul.setValue('a', 2);
+    setTimeout(() => resolve(3), 0);
+  });
+
+  expect(a).toEqual(3);
+});

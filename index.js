@@ -34,10 +34,15 @@ const getRandomId = () => {
 };
 
 class Listener {
-  constructor(name, callback) {
+  constructor(name, callback, unsubscribeCallback) {
     this.id = getRandomId();
     this.name = name;
     this.callback = callback;
+    this.unsubscribeCallback = unsubscribeCallback;
+  }
+
+  unsubscribe() {
+    this.unsubscribeCallback();
   }
 }
 
@@ -105,7 +110,9 @@ class Recul {
       this.listeners[name] = [];
     }
 
-    const listener = new Listener(name, callback);
+    const listener = new Listener(name, callback, () => {
+      this.unsubscribe(listener);
+    });
     this.listeners[name].push(listener);
 
     return listener;
