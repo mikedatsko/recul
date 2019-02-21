@@ -1,6 +1,6 @@
-const getHash = function(str){
-  let hash = 0;
-  const len = str.length;
+const getHash = function(str: string){
+  let hash: number = 0;
+  const len: number = str.length;
 
   if (len === 0) {
     return hash;
@@ -16,17 +16,17 @@ const getHash = function(str){
   return hash;
 };
 
-const immutableValue = {
-  object: value => JSON.parse(JSON.stringify(value)),
-  array: value => JSON.parse(JSON.stringify(value))
+const immutableValue: any = {
+  object: (value: any) => JSON.parse(JSON.stringify(value)),
+  array: (value: any) => JSON.parse(JSON.stringify(value))
 };
 
-export const config = {
+export const config: any = {
   localStorage: false
 };
 
 const getRandomId = () => {
-  function generateRandomNumber(min, max) {
+  function generateRandomNumber(min: number, max: number) {
     return Math.floor(Math.random() * (max - min) + min);
   }
 
@@ -34,7 +34,12 @@ const getRandomId = () => {
 };
 
 class Listener {
-  constructor(name, callback, unsubscribeCallback) {
+  id: number;
+  name: string;
+  callback: any;
+  unsubscribeCallback: any;
+
+  constructor(name: string, callback: any, unsubscribeCallback: any) {
     this.id = getRandomId();
     this.name = name;
     this.callback = callback;
@@ -47,12 +52,15 @@ class Listener {
 }
 
 class Recul {
+  store: any;
+  listeners: any;
+
   constructor() {
     this.store = {};
     this.listeners = {};
   }
 
-  setValue(name, value, isDispatch) {
+  setValue(name: string, value: any, isDispatch?: boolean) {
     const self = this;
 
     if (!self.store[name]) {
@@ -67,12 +75,12 @@ class Recul {
 
           return this.value;
         },
-        setValue: function(value) {
+        setValue: function(value: any) {
           this.value = value;
           this.hash = getHash(JSON.stringify(value));
 
           if (isDispatch !== false && self.listeners[name]) {
-            self.listeners[name].forEach(listener => listener.callback(value));
+            self.listeners[name].forEach((listener: any) => listener.callback(value));
           }
 
           if (config.localStorage && localStorage) {
@@ -85,7 +93,7 @@ class Recul {
     self.store[name].setValue(value);
   }
 
-  getValue(name, defaultValue) {
+  getValue(name: string, defaultValue?: any) {
     if (typeof this.store[name] === 'undefined') {
       if (config.localStorage && localStorage) {
         return localStorage.getItem(name);
@@ -105,7 +113,7 @@ class Recul {
     this.store = {};
   }
 
-  on(name, callback) {
+  on(name: string, callback: any) {
     if (!this.listeners[name]) {
       this.listeners[name] = [];
     }
@@ -118,27 +126,27 @@ class Recul {
     return listener;
   }
 
-  off(listeners) {
+  off(listeners: any | any[]) {
     if (!listeners.length) {
       listeners = [listeners];
     }
 
-    listeners.forEach(listener => {
-      this.listeners[listener.name] = this.listeners[listener.name].filter(listener_ => listener_.id !== listener.id);
+    listeners.forEach((listener: any) => {
+      this.listeners[listener.name] = this.listeners[listener.name].filter((listener_: any) => listener_.id !== listener.id);
     });
   }
 
-  subscribe(name, callback) {
+  subscribe(name: string, callback: any) {
     return this.on(name, callback);
   }
 
-  unsubscribe(listeners) {
+  unsubscribe(listeners: any | any[]) {
     return this.off(listeners);
   }
 }
 
 export const recul = new Recul();
-export const ReculOn = function(target, key) {
+export const ReculOn = function(target: any, key: string) {
   console.log('ReculOn', arguments);
 
   return function() {
