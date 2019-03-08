@@ -88,3 +88,16 @@ test('is works listener "subscribe" and "unsubscribe"', async () => {
 
   expect(a).toEqual(3);
 });
+
+test('is works with hash', async () => {
+  expect.assertions(2);
+  recul.reset();
+
+  recul.subscribe('a', value => {
+    expect(recul.getValue('a')).toEqual(value);
+  });
+
+  recul.setValue('a', 1);
+  recul.setValue('a', 1);
+  recul.setValue('a', 2);
+});

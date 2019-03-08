@@ -21,7 +21,7 @@ const immutableValue = {
   array: value => JSON.parse(JSON.stringify(value))
 };
 
-export const config = {
+const config = {
   localStorage: false
 };
 
@@ -68,8 +68,14 @@ class Recul {
           return this.value;
         },
         setValue: function(value) {
+          const hash = getHash(JSON.stringify(value));
+
+          if (hash === this.hash) {
+            return;
+          }
+
+          this.hash = hash;
           this.value = value;
-          this.hash = getHash(JSON.stringify(value));
 
           if (isDispatch !== false && self.listeners[name]) {
             self.listeners[name].forEach(listener => listener.callback(value));
@@ -137,11 +143,17 @@ class Recul {
   }
 }
 
-export const recul = new Recul();
-export const ReculOn = function(target, key) {
+const recul = new Recul();
+const ReculOn = function(target, key) {
   console.log('ReculOn', arguments);
 
   return function() {
     console.log('ReculOn', 'function', arguments);
   };
+};
+
+module.exports = {
+  recul: recul,
+  ReculOn: ReculOn,
+  config: config,
 };
