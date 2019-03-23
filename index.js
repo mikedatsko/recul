@@ -68,7 +68,7 @@ class Recul {
           return this.value;
         },
         setValue: function(value) {
-          const hash = getHash(JSON.stringify(value));
+          const hash = getHash(JSON.stringify(value) || '');
 
           if (hash === this.hash) {
             return;

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1552091269823" clover="3.2.0">
-  <project timestamp="1552091269824" name="All files">
-    <metrics statements="66" coveredstatements="58" conditionals="32" coveredconditionals="25" methods="23" coveredmethods="20" elements="121" coveredelements="103" complexity="0" loc="66" ncloc="66" packages="1" files="1" classes="1"/>
+<coverage generated="1553383784138" clover="3.2.0">
+  <project timestamp="1553383784139" name="All files">
+    <metrics statements="66" coveredstatements="58" conditionals="34" coveredconditionals="26" methods="23" coveredmethods="20" elements="123" coveredelements="104" complexity="0" loc="66" ncloc="66" packages="1" files="1" classes="1"/>
     <file name="index.js" path="/Users/mykhailodatsko/Projects/own/recul/index.js">
-      <metrics statements="66" coveredstatements="58" conditionals="32" coveredconditionals="25" methods="23" coveredmethods="20"/>
+      <metrics statements="66" coveredstatements="58" conditionals="34" coveredconditionals="26" methods="23" coveredmethods="20"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="11" type="stmt"/>
       <line num="3" count="11" type="stmt"/>
@@ -34,7 +34,7 @@
       <line num="64" count="5" type="cond" truecount="2" falsecount="0"/>
       <line num="65" count="2" type="stmt"/>
       <line num="68" count="3" type="stmt"/>
-      <line num="71" count="11" type="stmt"/>
+      <line num="71" count="11" type="cond" truecount="1" falsecount="1"/>
       <line num="73" count="11" type="cond" truecount="2" falsecount="0"/>
       <line num="74" count="1" type="stmt"/>
       <line num="77" count="10" type="stmt"/>
