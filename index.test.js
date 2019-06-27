@@ -20,12 +20,20 @@ test('is works "setValue" and "getValue"', () => {
   expect(recul.getValue('a')).toBe(1);
 });
 
-test('is has immutable value', () => {
+test('is has immutable value for array', () => {
   recul.reset();
   recul.setValue('a', [1]);
   const a = recul.getValue('a');
   a.push(2);
   expect(recul.getValue('a')).toEqual([1]);
+});
+
+test('is has immutable value for object', () => {
+  recul.reset();
+  recul.setValue('a', {b: 1});
+  const a = recul.getValue('a');
+  a.b = 2;
+  expect(recul.getValue('a')).toEqual({b: 1});
 });
 
 test('is works "on"', async () => {

@@ -57,7 +57,6 @@ class Recul {
 
     if (!self.store[name]) {
       self.store[name] = {
-        value: value,
         type: typeof value === 'object' && value.hasOwnProperty('length') ? 'array' : typeof value,
         hash: 0,
         getValue: function() {
@@ -75,7 +74,11 @@ class Recul {
           }
 
           this.hash = hash;
-          this.value = value;
+          Object.defineProperty(this, 'value', {
+            value: value,
+            writable: false,
+            configurable: true
+          });
 
           if (isDispatch !== false && self.listeners[name]) {
             self.listeners[name].forEach(listener => listener.callback(value));
@@ -86,6 +89,12 @@ class Recul {
           }
         }
       };
+
+      Object.defineProperty(self.store[name], 'value', {
+        value: value,
+        writable: false,
+        configurable: true
+      });
     }
 
     self.store[name].setValue(value);
