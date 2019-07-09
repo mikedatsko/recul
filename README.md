@@ -4,6 +4,21 @@
 
 [![npm version](http://img.shields.io/npm/v/recul.svg?style=flat)](https://npmjs.org/package/recul)
 
+#### ⚠ Breaking change since 1.3.1 version!
+
+Changed subscribe behavior for dispatching:
+
+Previously, till the 1.3.1 version, `recul.setValue('name', { data })` dispatched the value automatically if the value is new, not equal to the value in store.
+
+From the 1.3.1 version if `setValue` should dispatch the value, then the flag `isDispatch` should be changed to `true`.
+
+Example:
+
+`recul.setValue('name', { data })` - silent setting value.
+`recul.setValue('name', { data }, true)` - setting value and dispatch this value.
+
+Important notice: dispatch will throw the value that was in `setValue`. If the value is already exist, then the store will not update.
+
 ## Introduction
 
 The most important ability of the system is cache, especially in the state management.
