@@ -1,4 +1,4 @@
-const getHash = function(str){
+const getHash = function(str) {
   let hash = 0;
   const len = str.length;
 
@@ -9,7 +9,7 @@ const getHash = function(str){
   let char;
   for (let i = 0; i < len; i++) {
     char = str.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
+    hash = (hash << 5) - hash + char;
     hash = hash & hash;
   }
 
@@ -18,11 +18,11 @@ const getHash = function(str){
 
 const immutableValue = {
   object: value => JSON.parse(JSON.stringify(value)),
-  array: value => JSON.parse(JSON.stringify(value))
+  array: value => JSON.parse(JSON.stringify(value)),
 };
 
 const config = {
-  localStorage: false
+  localStorage: false,
 };
 
 const getRandomId = () => {
@@ -57,7 +57,10 @@ class Recul {
 
     if (!self.store[name]) {
       self.store[name] = {
-        type: typeof value === 'object' && value.hasOwnProperty('length') ? 'array' : typeof value,
+        type:
+          typeof value === 'object' && value.hasOwnProperty('length')
+            ? 'array'
+            : typeof value,
         hash: 0,
         getValue: function() {
           if (immutableValue[this.type]) {
@@ -69,31 +72,29 @@ class Recul {
         setValue: function(value) {
           const hash = getHash(JSON.stringify(value) || '');
 
-          if (hash === this.hash) {
-            return;
+          if (hash !== this.hash) {
+            this.hash = hash;
+            Object.defineProperty(this, 'value', {
+              value: value,
+              writable: false,
+              configurable: true,
+            });
           }
 
-          this.hash = hash;
-          Object.defineProperty(this, 'value', {
-            value: value,
-            writable: false,
-            configurable: true
-          });
-
-          if (isDispatch !== false && self.listeners[name]) {
+          if (isDispatch && self.listeners[name]) {
             self.listeners[name].forEach(listener => listener.callback(value));
           }
 
           if (config.localStorage && localStorage) {
             localStorage.setItem(name, value);
           }
-        }
+        },
       };
 
       Object.defineProperty(self.store[name], 'value', {
         value: value,
         writable: false,
-        configurable: true
+        configurable: true,
       });
     }
 
@@ -139,7 +140,9 @@ class Recul {
     }
 
     listeners.forEach(listener => {
-      this.listeners[listener.name] = this.listeners[listener.name].filter(listener_ => listener_.id !== listener.id);
+      this.listeners[listener.name] = this.listeners[listener.name].filter(
+        listener_ => listener_.id !== listener.id
+      );
     });
   }
 
