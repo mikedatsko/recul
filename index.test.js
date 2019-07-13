@@ -30,10 +30,10 @@ test('is has immutable value for array', () => {
 
 test('is has immutable value for object', () => {
   recul.reset();
-  recul.setValue('a', {b: 1});
+  recul.setValue('a', { b: 1 });
   const a = recul.getValue('a');
   a.b = 2;
-  expect(recul.getValue('a')).toEqual({b: 1});
+  expect(recul.getValue('a')).toEqual({ b: 1 });
 });
 
 test('is works "on"', async () => {
@@ -95,6 +95,19 @@ test('is works listener "subscribe" and "unsubscribe"', async () => {
   });
 
   expect(a).toEqual(3);
+});
+
+test('is works subscribe on dispatch', async () => {
+  expect.assertions(2);
+  recul.reset();
+
+  recul.subscribe('a', value => {
+    expect(recul.getValue('a')).toEqual(value);
+  });
+
+  recul.setValue('a', 1);
+  recul.setValue('a', 1);
+  recul.setValue('a', 1, true);
 });
 
 test('is works with hash', async () => {

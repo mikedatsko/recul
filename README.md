@@ -1,6 +1,8 @@
 # Recul
 
-#### Sync Stage Management library with cache through hash
+### Sync State Management
+
+##### Sync State Management with cache through numeric hash.
 
 [![npm version](http://img.shields.io/npm/v/recul.svg?style=flat)](https://npmjs.org/package/recul)
 
