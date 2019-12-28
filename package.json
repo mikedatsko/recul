@@ -1,6 +1,6 @@
 {
   "name": "recul",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Sync State Management with cache through numeric hash",
   "main": "index.js",
   "scripts": {
