@@ -9,12 +9,6 @@ class Recul {
 
   create(name, value) {
     this.store[name] = new StoreItem(name, value, this.config);
-
-    Object.defineProperty(this.store[name], 'value', {
-      value: value,
-      writable: false,
-      configurable: true
-    });
   }
 
   setValue(name, value, isDispatch) {
@@ -28,7 +22,9 @@ class Recul {
   getValue(name, defaultValue) {
     if (typeof this.store[name] === 'undefined') {
       if (this.config.localStorage && localStorage) {
-        return localStorage.getItem(name);
+        const value = localStorage.getItem(name);
+        this.setValue(name, value);
+        return value;
       }
 
       if (typeof defaultValue !== 'undefined') {
@@ -42,7 +38,8 @@ class Recul {
   }
 
   reset() {
-    this.store = {};
+    const keys = Object.keys(this.store);
+    keys.forEach(key => delete this.store[key]);
   }
 
   on(name, callback) {
@@ -53,7 +50,9 @@ class Recul {
     if (!this.store[name]) {
       this.create(name);
     }
+
     this.store[name].addListener(listener);
+
     return listener;
   }
 

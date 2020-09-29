@@ -67,15 +67,6 @@ recul.setValue('a', 3);
 // Unsubscribe many listeners
 recul.off([listener1, listener2, listener3]);
 recul.setValue('a', 4);
-
-// Check hash
-recul.subscribe('a', value => {
-  console.log('a', recul.getValue('a'));
-});
-
-recul.setValue('a', 1); // console.log -> 1
-recul.setValue('a', 1); // no reaction
-recul.setValue('a', 2); // console.log -> 2
 ```
 
 ### Flux app store usage
@@ -185,5 +176,5 @@ export const userSelectors = {
 ## Test
 
 ```
-npm run test
+npm test
 ```

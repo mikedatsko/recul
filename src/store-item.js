@@ -1,5 +1,3 @@
-const getHash = require('./hash');
-
 const immutableValue = {
   object: value => JSON.parse(JSON.stringify(value)),
   array: value => JSON.parse(JSON.stringify(value))
@@ -12,6 +10,7 @@ class StoreItem {
     this.hash = 0;
     this.listeners = [];
     this.config = config;
+    this.value = value;
   }
 
   getValue() {
@@ -23,19 +22,9 @@ class StoreItem {
   }
 
   setValue(value, isDispatch) {
-    const hash = getHash(JSON.stringify(value) || '');
-    const isHashEqual = hash === this.hash;
+    this.value = value;
 
-    if (!isHashEqual) {
-      this.hash = hash;
-      Object.defineProperty(this, 'value', {
-        value: value,
-        writable: false,
-        configurable: true
-      });
-    }
-
-    if ((isDispatch || !isHashEqual) && this.listeners.length) {
+    if (isDispatch && this.listeners.length) {
       this.listeners.forEach(listener => listener.callback(value));
     }
 
