@@ -2,15 +2,7 @@
 
 ### Sync State Management
 
-##### Sync State Management with cache through numeric hash.
-
 [![npm version](http://img.shields.io/npm/v/recul.svg?style=flat)](https://npmjs.org/package/recul)
-
-## Introduction
-
-The most important ability of the system is cache, especially in the state management.
-
-The state of the application could be updated a lot of times per second. This cause a bunch of unnecessary reactions at the subscribed children of the system. To prevent such kind of reactions Recul use a cache through hash. Hash - is a number representation of the string. The implementation of hash generation is took from [here](https://stackoverflow.com/a/7616484/3434141).
 
 ## Install
 
