@@ -8,5 +8,6 @@ const recul = new Recul(config);
 
 module.exports = {
   recul: recul,
-  config: config
+  config: config,
+  Recul: Recul
 };
