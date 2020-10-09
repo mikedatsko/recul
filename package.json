@@ -7,7 +7,7 @@
     "test": "jest",
     "coverage": "jest --coverage",
     "lint": "eslint src/**/*.js index.js index.test.js",
-    "prepublishOnly": "run-s lint test"
+    "prepublishOnly": "run-s test"
   },
   "repository": {
     "type": "git",
