@@ -29,7 +29,7 @@ class StoreItem {
     }
 
     if (this.config.localStorage && window && window.localStorage) {
-      localStorage.setItem(this.name, value);
+      localStorage.setItem(this.name, JSON.stringify(value));
     }
   }
 
