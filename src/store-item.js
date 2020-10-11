@@ -28,7 +28,7 @@ class StoreItem {
       this.listeners.forEach(listener => listener.callback(value));
     }
 
-    if (this.config.localStorage && window && window.localStorage) {
+    if (this.config.localStorage && typeof localStorage !== 'undefined') {
       localStorage.setItem(this.name, JSON.stringify(value));
     }
   }

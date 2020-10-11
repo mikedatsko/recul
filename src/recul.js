@@ -21,7 +21,7 @@ class Recul {
 
   getValue(name, defaultValue) {
     if (typeof this.store[name] === 'undefined') {
-      if (this.config.localStorage && window && window.localStorage) {
+      if (this.config.localStorage && typeof localStorage !== 'undefined') {
         const value = JSON.parse(localStorage.getItem(name));
         this.setValue(name, value);
         return value;
