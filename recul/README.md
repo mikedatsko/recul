@@ -2,15 +2,7 @@
 
 ### Sync State Management
 
-##### Sync State Management with cache through numeric hash.
-
 [![npm version](http://img.shields.io/npm/v/recul.svg?style=flat)](https://npmjs.org/package/recul)
-
-## Introduction
-
-The most important ability of the system is cache, especially in the state management.
-
-The state of the application could be updated a lot of times per second. This cause a bunch of unnecessary reactions at the subscribed children of the system. To prevent such kind of reactions Recul use a cache through hash. Hash - is a number representation of the string. The implementation of hash generation is took from [here](https://stackoverflow.com/a/7616484/3434141).
 
 ## Install
 
@@ -67,15 +59,6 @@ recul.setValue('a', 3);
 // Unsubscribe many listeners
 recul.off([listener1, listener2, listener3]);
 recul.setValue('a', 4);
-
-// Check hash
-recul.subscribe('a', value => {
-  console.log('a', recul.getValue('a'));
-});
-
-recul.setValue('a', 1); // console.log -> 1
-recul.setValue('a', 1); // no reaction
-recul.setValue('a', 2); // console.log -> 2
 ```
 
 ### Flux app store usage
@@ -185,5 +168,5 @@ export const userSelectors = {
 ## Test
 
 ```
-npm run test
+npm test
 ```
